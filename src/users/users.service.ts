@@ -9,23 +9,22 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
   ) {}
-
+//get all users
   async findAll(): Promise<User[]> {
     return await this.usersRepository.find();
   }
-
+// Get one user
   async findOne(id: string): Promise<object> {
     try {
       const id_new: number = +id;
       console.log(id_new);
-      const user = await this.usersRepository.findOne({ id: id_new });
-
+      const user = await this.usersRepository.findOne({ id: id_new })
       return user;
     } catch (e) {
       return { msg: e.message };
     }
   }
-
+// Delete one user
   async remove(id: string): Promise<object> {
     try {
       const id_new: number = +id;
@@ -36,6 +35,7 @@ export class UsersService {
       return { msg: e.message };
     }
   }
+  // Insert one user to table
   async insertUser(
     firstName: string,
     lastName: string,
@@ -53,6 +53,7 @@ export class UsersService {
       return { msg: e.message };
     }
   }
+  //Update a user
   async updateUser(
     id: string,
     firstName: string,

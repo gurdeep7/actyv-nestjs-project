@@ -13,6 +13,7 @@ import { nanoid } from 'nanoid';
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
+  //add a user in table
   @Post()
   async addUser(
     @Body('firstName') firstName: string,
@@ -26,20 +27,22 @@ export class UsersController {
     );
     return { message: 'User Successfull created with id ' + createdUserId };
   }
+  //Get all users
   @Get()
   async findAllUser() {
     return await this.userService.findAll();
   }
-
+// Get a single user by id
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return await this.userService.findOne(id);
   }
+  //delete request
   @Delete(':id')
   async deleteUser(@Param('id') id: string) {
     return await this.userService.remove(id);
   }
-
+//update request
   @Patch(':id')
   async updateUser(@Param('id') id: string,
   @Body('firstName') firstName: string,
